@@ -14,5 +14,3 @@ public class ProyectoEstructuras1 {
     }
     
 }
-
-//Falta desarroyar

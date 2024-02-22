@@ -9,17 +9,19 @@ desarroyo de clase y metodo de los graphos**/
 
 package proyectoestructuras.pkg1;
 
+import java.util.Random;
+
 public class Graph {
     City[] cities;
     int max_cities;
     int actual_cities;
-    
-    
+    int first;
     public Graph(int size){
         this.max_cities = size;
         this.actual_cities = 0;
         this.cities= new City[size];
         this.inicializar(this.cities);
+        first = 0;
     }
     
     public void inicializar(City[] array){
@@ -89,4 +91,29 @@ public class Graph {
         return -1;
     }
     
+    
+    public void run(Ant ant,double alpha, double beta, double ro){
+        boolean[] visited = new boolean[this.max_cities];
+        for (int i = 0; i < this.max_cities; i++) {
+            visited[i] = false;
+        }
+        
+        this.deepRun(visited, this.first, alpha, beta, ant);
+    }
+    
+    public void deepRun(boolean[]  visited, int position, double alpha, double beta, Ant ant){
+        visited[position] = true;
+        double probabilities = 0;
+        Random random = new Random();
+        float randFloat = random.nextFloat();
+        
+        for (int i = 0; i < this.max_cities; i++) {
+            if(!visited[i] && this.cities[position].getPaths().search(this.cities[i].getName())){
+                probabilities += this.calcProbabilities(visited, position, alpha, beta, ant);
+            }
+            if(randFloat < probabilities){
+                deepRun(visited, i, alpha, beta, ant);
+            }
+        }
+    }
 }
