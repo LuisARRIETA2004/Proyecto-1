@@ -4,7 +4,7 @@
  */
 /*
 @StefanoDiMichelangelo
-desarroyo de clase y metodo city**/
+desarrollo de clase y metodo city**/
 
 package proyectoestructuras.pkg1;
 
