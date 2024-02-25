@@ -9,10 +9,6 @@ desarroyo de clase y metodo de los graphos**/
 
 package proyectoestructuras.pkg1;
 
-/**
- *
- * @author andre
- */
 public class Ant {
     double totalDistance;
     City[] visitedCities;
