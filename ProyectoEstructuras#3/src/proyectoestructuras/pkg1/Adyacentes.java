@@ -9,69 +9,73 @@ desarroyo de las Adyacencias**/
 
 package proyectoestructuras.pkg1;
 
+package proyectoestructuras.pkg1;
+
 public class Adyacentes {
-    Path pFirst;
+    Path pFirst;  // Primer camino en la lista de adyacencias
     
-    public Adyacentes(){
-        this.pFirst = null;
+    public Adyacentes(){  // Constructor de la clase Adyacentes
+        this.pFirst = null;  // Inicializa el primer camino como nulo
     }
     
-    
-    public void NewPath(String name, int distance){
-        if(!this.search(name)){
-            Path newPath = new Path(name, distance);
-            if(this.pFirst != null){
+    // Método para crear un nuevo camino entre ciudades
+    public void NewPath(String name, int distance) {
+        if(!this.search(name)) {  // Verifica si el camino ya existe
+            Path newPath = new Path(name, distance);  // Crea un nuevo camino
+            if(this.pFirst != null) {
                 Path aux = this.pFirst;
-                while(aux.getNextPath() != null){
+                while(aux.getNextPath() != null) {
                     aux = aux.getNextPath();
                 }
-                aux.setNextPath(newPath);
+                aux.setNextPath(newPath);  // Agrega el nuevo camino al final de la lista
             }
-        }else{
-            
+        } else {
+            // Si el camino ya existe, no hace nada
         }
     }
     
-    public void DeletePath(String name){
+    // Método para eliminar un camino por su nombre
+    public void DeletePath(String name) {
         Path aux = this.pFirst;
-        if(this.pFirst != null){
-            while(aux.getNextPath() != null && !aux.getNextPath().getDestiny().equals(name)){
+        if(this.pFirst != null) {
+            while(aux.getNextPath() != null && !aux.getNextPath().getDestiny().equals(name)) {
                 aux = aux.getNextPath();
             }
-            if(aux.getNextPath() != null){
-                aux.setNextPath(aux.getNextPath().getNextPath());
+            if(aux.getNextPath() != null) {
+                aux.setNextPath(aux.getNextPath().getNextPath());  // Elimina el camino
             }
         }
     }
     
-    public String print(){
+    // Método para imprimir la lista de ciudades adyacentes
+    public String print() {
         Path aux = this.pFirst;
         String adyacentes = "Ciudades adyacentes: \n";
-        while(aux!= null){
+        while(aux != null) {
             adyacentes += aux.getDestiny() + "\n";
             aux = aux.getNextPath();
         }
         return adyacentes;
     }
     
-    public Path SearchPath(String name){
+    // Método para buscar un camino por su nombre
+    public Path SearchPath(String name) {
         Path aux = this.pFirst;
-        while(aux != null && !aux.getDestiny().equals(name)){
+        while(aux != null && !aux.getDestiny().equals(name)) {
             aux = aux.getNextPath();
         }
         return aux;
     }
     
-    public boolean search(String name){
+    // Método para verificar si un camino con un nombre dado ya existe
+    public boolean search(String name) {
         Path aux = this.pFirst;
-        while(aux!= null){
-            if(aux.getDestiny().equals(name)){
-                return true;
+        while(aux != null) {
+            if(aux.getDestiny().equals(name)) {
+                return true;  // El camino ya existe
             }
             aux = aux.getNextPath();
         }
-        return false;
-        
+        return false;  // El camino no existe
     }
-    
 }
