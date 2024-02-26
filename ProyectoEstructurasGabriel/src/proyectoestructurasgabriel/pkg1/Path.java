@@ -4,12 +4,14 @@
  */
 package proyectoestructurasgabriel.pkg1;
 
+// Variables para almacenar la distancia, feromonas, destino y siguiente camino
 public class Path {
     private double distance;
     private double feromonas;
     private String destiny;
     private Path nextPath;
     public double trail;
+    // Constructor que recibe el destino y la distancia del camino
     public Path(String dest, double dist){
         this.destiny = dest;
         this.distance = dist;
