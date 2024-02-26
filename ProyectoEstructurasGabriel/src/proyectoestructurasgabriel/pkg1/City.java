@@ -5,40 +5,43 @@
 package proyectoestructurasgabriel.pkg1;
 
 public class City {
-    private Adyacentes paths;
-    private String name;
-    
-    public City(String name){
-        this.paths = new Adyacentes();
-        this.name = name;
-    }
+   // Variable de instancia para almacenar los caminos adyacentes
+   private Adyacentes paths;
+   // Variable de instancia para almacenar el nombre de la ciudad
+   private String name;
+   
+   // Constructor que inicializa el nombre de la ciudad y los caminos adyacentes como una nueva instancia de Adyacentes
+   public City(String name){
+       this.paths = new Adyacentes();
+       this.name = name;
+   }
 
-    /**
-     * @return the paths
-     */
-    public Adyacentes getPaths() {
-        return paths;
-    }
+   /**
+    * @return los caminos adyacentes
+    */
+   public Adyacentes getPaths() {
+       return paths;
+   }
 
-    /**
-     * @param paths the paths to set
-     */
-    public void setPaths(Adyacentes paths) {
-        this.paths = paths;
-    }
+   /**
+    * @param paths los caminos adyacentes a establecer
+    */
+   public void setPaths(Adyacentes paths) {
+       this.paths = paths;
+   }
 
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+   /**
+    * @return el nombre
+    */
+   public String getName() {
+       return name;
+   }
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+   /**
+    * @param name el nombre a establecer
+    */
+   public void setName(String name) {
+       this.name = name;
+   }
 }
