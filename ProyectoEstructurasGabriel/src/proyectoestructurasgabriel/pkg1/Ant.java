@@ -5,11 +5,13 @@
 package proyectoestructurasgabriel.pkg1;
 
 public class Ant {
-    double totalDistance;
-    String visitedCities;
-    
-    public Ant(){
-        this.totalDistance = 0;
-        this.visitedCities = "";
-    }
+   // variables de instancia para almacenar la distancia total recorrida y las ciudades visitadas
+   double totalDistance;
+   String visitedCities;
+   
+   // Constructor que inicializa la distancia total en 0 y las ciudades visitadas como una cadena vacía
+   public Ant(){
+       this.totalDistance = 0;
+       this.visitedCities = "";
+   }
 }
