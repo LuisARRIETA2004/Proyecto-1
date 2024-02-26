@@ -11,13 +11,13 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class MyGraph {
-
+// Arreglo de ciudades
     City[] cities;
     int max_cities;
     int actual_cities;
     int first;
     int last;
-
+    // Constructor que inicializa el grafo con el tamaño proporcionado
     public MyGraph(int size) {
         this.max_cities = size;
         this.actual_cities = 0;
@@ -25,13 +25,13 @@ public class MyGraph {
         this.inicializar(this.cities);
         first = last = 0;
     }
-
+    // Método para inicializar el arreglo de ciudades con instancias de City
     public void inicializar(City[] array) {
         for (int i = 0; i < array.length; i++) {
             array[i] = new City("");
         }
     }
-
+    // Método para agregar una nueva ciudad al grafo
     public void NewCity(String name) {
         int position = this.searchEmpty();
         if (position != -1 && !this.searchCity(name)) {
@@ -39,8 +39,9 @@ public class MyGraph {
             this.actual_cities++;
         } 
     }
-
+    
     public void newPath(String origin, String destiny, double distance) {
+        // Verifica si tanto el origen como el destino existen en el grafo
         if (this.searchCity(origin) && this.searchCity(destiny)) {
             if(this.searchPath(origin, destiny)== null){
             for (int i = 0; i < this.max_cities; i++) {
@@ -59,7 +60,7 @@ public class MyGraph {
             JOptionPane.showMessageDialog(null, "CIUDAD INEXISTENTE");
         }
     }
-
+    // Método para eliminar una ciudad del grafo
     public void DeleteCity(String name) {
         for (int i = 0; i < max_cities; i++) {
             if (this.cities[i].getName().equals(name)) {
@@ -71,7 +72,7 @@ public class MyGraph {
             }
         }
     }
-
+    // Método para buscar si una ciudad ya existe en el grafo
     public boolean searchCity(String name) {
         for (int i = 0; i < this.max_cities; i++) {
             if (this.cities[i].getName().equals(name)) {
@@ -80,7 +81,7 @@ public class MyGraph {
         }
         return false;
     }
-
+    // Método para buscar la primera posición vacía en el arreglo de ciudades
     public int searchEmpty() {
         for (int i = 0; i < this.max_cities; i++) {
             if (this.cities[i].getName().equals("")) {
@@ -89,7 +90,7 @@ public class MyGraph {
         }
         return -1;
     }
-
+    // Método para ejecutar el algoritmo de la hormiga con parámetros alpha, beta y ro
     public void run(Ant ant, double alpha, double beta, double ro) {
         boolean[] visited = new boolean[this.max_cities];
         for (int i = 0; i < this.max_cities; i++) {
@@ -101,7 +102,7 @@ public class MyGraph {
     }
 
     public void deepRun(boolean[] visited, int position, double alpha, double beta, Ant ant) {
-
+        // Marca la posición actual como visitada
         visited[position] = true;
         double probabilities = 0;
         Random random = new Random();
@@ -115,6 +116,7 @@ public class MyGraph {
             }
         }
 //        System.out.println(randFloat);
+        // Calcula las probabilidades para las ciudades adyacentes no visitadas
         for (int i = 0; i < this.max_cities; i++) {
             Path actualPath2 = this.cities[position].getPaths().SearchPath(this.cities[i].getName());
             if (i != position &&!visited[i] && actualPath2 != null) {
@@ -135,11 +137,11 @@ public class MyGraph {
             }
         }
     }
-
+    // Método para calcular las probabilidades de moverse a una ciudad adyacente
     public double calcProbabilities(boolean[] visited, int position, Path actualPath, double alpha, double beta, Ant ant, double sum) {
         return (Math.pow(actualPath.getFeromonas(), alpha) * Math.pow(1/actualPath.getDistance(), beta)) / sum;
     }
-
+    // Método para inicializar las feromonas de los caminos entre ciudades
     public void iniciatePheromones() {
         for (int i = 0; i < this.max_cities; i++) {
             Path aux = this.cities[i].getPaths().pFirst;
@@ -149,7 +151,7 @@ public class MyGraph {
             }
         }
     }
-
+    // Método para actualizar las feromonas de los caminos visitados por la hormiga
     public void newPheromones(Ant h) {
         String[] visitados = h.visitedCities.split(",");
         for (int i = 0; i < visitados.length; i++) {
@@ -159,7 +161,7 @@ public class MyGraph {
             }
         }
     }
-
+    // Método para calcular el rastro de feromonas con la evaporación
     public void calculatePheromonesTrail(double evaporacion) {
         for (int i = 0; i < this.max_cities; i++) {
             Path aux = this.cities[i].getPaths().pFirst;
@@ -170,7 +172,7 @@ public class MyGraph {
             }
         }
     }
-
+    // Método para buscar un camino entre ciudades
     public Path searchPath(String city, String path) {
         for (int i = 0; i < this.max_cities; i++) {
             if (this.cities[i].getName().equals(city)) {
@@ -183,7 +185,7 @@ public class MyGraph {
         }
         return null;
     }
-
+    // Método para obtener información sobre las feromonas en los caminos
     public String pheromones() {
         String str = "";
         String[] visited = new String[max_cities];
@@ -203,7 +205,7 @@ public class MyGraph {
         }
         return str;
     }
-
+    // Método para verificar si una ciudad ha sido visitada
     public boolean visited(String city, String[] visited) {
         for (int i = 0; i < max_cities; i++) {
             if (visited[i].equals(city)) {
@@ -239,6 +241,7 @@ public class MyGraph {
         }
         return str;
     }
+    // Método para obtener el índice de una ciudad en el arreglo
     public int indexCity(String city){
         for (int i = 0; i < this.max_cities; i++) {
             if (this.cities[i].getName().equals(city)) {
@@ -247,6 +250,7 @@ public class MyGraph {
         }
         return -1;
     }
+    // Método para establecer el índice de la ciudad de inicio (first) y destino (last)
     public boolean setFL(String origin, String destiny){
         if(this.searchCity(origin) && this.searchCity(destiny)){
             this.first = indexCity(origin);
@@ -255,7 +259,7 @@ public class MyGraph {
         }
         return false;
     }
-    
+    // Método para mostrar el nombre de las ciudades
     public String showVertex(){
         String vertex = "";
         for (int i = 0; i < this.max_cities; i++) {
@@ -265,6 +269,7 @@ public class MyGraph {
         }
         return vertex;
     }
+    // Método para escribir la información del grafo en un archivo
     public void escribirArchivo(String archivo) {
         System.out.println(archivo);
         String path = archivo;
